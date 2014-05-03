@@ -1,12 +1,29 @@
-﻿if (!app.documents.length > 0) { //--если нет активных документов
+﻿#target photoshop
+/**
+ * Разбрасывает копии слоёв в случайном порядке со случайным поворотом по таблице в документе.
+ * Меняется число строк и столбцов.
+ * Настройки пока что изменяются в этом файле в Init(). 
+ * Это:
+ * rows - сколько будет строк
+ * columns - сколько столбцов
+ * spacingX - расстояние между ними по горизонтали
+ * spacingY - по вертикале
+ * Автор:  PavelK (Riflio)
+ */
+    
+    
+
+if (!app.documents.length > 0) { //--если нет активных документов
  alert('Нет документа для работы!');
- complete ();
 } else {
-	app.preferences.rulerUnits = Units.PIXELS;
-	app.preferences.typeUnits = TypeUnits.PIXELS;
-	var _docRef = app.activeDocument;  //-- получили документ, в котором работаем
- 	var _layers=_docRef.artLayers; //-- получили набор слоёв
-     _docRef.suspendHistory('ChaosLayers', 'Init()'); //-- Что бы в истории вместо кучи действий было только одно это
+    if (app.activeDocument.artLayers.length<=1) {
+        alert('Нет слоёв для работы! Слои должны быть в корне, не в папках/группах!');
+    } else {
+        app.preferences.rulerUnits = Units.PIXELS;
+        app.preferences.typeUnits = TypeUnits.PIXELS;
+        var _docRef = app.activeDocument;  //-- получили документ, в котором работаем 	
+         _docRef.suspendHistory('ChaosLayers', 'Init()'); //-- Что бы в истории вместо кучи действий было только одно это
+     }
 }	
 
 /**
@@ -58,8 +75,8 @@ function Init() {
     //-- по скольким столбцам и строкам распределять
     var rows = 15;
     var columns = 19; 
-    var spacingX=50; //-- Расстояние между объектами по горизонтали 
-    var spacingY=50;  //-- и вертикале   
+    var spacingX=70; //-- Расстояние между объектами по горизонтали 
+    var spacingY=70;  //-- и вертикале   
     //-- Узнаем размер документа в пикс.
     var dW = _docRef.width.value;
     var dH = _docRef.height.value;
